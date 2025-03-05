@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+ 
+<h1>Care Central Bot Dashboard</h1>
+<button id="done-button">I’m Done</button>
+
+<h2>Members</h2>
+<ul class="member-list">
+  <% members.forEach(member => { %>
+    <li>
+      <strong><%= member.memberName %></strong> - <%= member.detectedAt.toLocaleString() %>
+    </li>
+  <% }) %>
+</ul>
+
+<h2>Logs</h2>
+<ul class="log-list">
+  <% logs.forEach(log => { %>
+    <li>
+      <%= log.message %> - <%= log.timestamp.toLocaleString() %>
+    </li>
+  <% }) %>
+</ul>
+
+</body>
+
+<script>
+  document.getElementById("done-button").addEventListener("click", async () => {
+    await fetch("/done", { method: "POST" });
+    alert("The bot will now proceed.");
+  });
+</script>
+
+</html>
